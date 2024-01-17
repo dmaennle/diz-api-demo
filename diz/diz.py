@@ -1,3 +1,4 @@
+import time
 from .labvalue import LABVALUE
 from collections import namedtuple
 
@@ -11,7 +12,10 @@ class Diz:
         Args:
             credentials (str): path to credentials file
         """
-        # TODO read credentials and connect to API
+        # TODO read credentials and connect to API/DB
+        
+        # Log activity
+        self.log_activity("Diz connection initialized")
         pass
     
     def labvalues(self, patient_id: int, start_date: str, end_date: str, type: str) -> namedtuple:
@@ -26,6 +30,9 @@ class Diz:
         Returns:
             namedtuple: tuple of labvalues with value and datetime as fields.
         """
+        
+        # Log activity
+        self.log_activity("Labvalues requested for Patient ID: " + str(patient_id) + " between " + start_date + " and " + end_date + " for " + type + " values")
         
         # TODO: implement this method
         
@@ -42,5 +49,22 @@ class Diz:
             return return_values
         
         return None
+    
+    def log_activity(self, activity: str) -> bool:
+        """Log an activity of a user to the database
+
+        Args:
+            activity (str): Activity to log
+
+        Returns:
+            bool: True if activity was logged successfully
+        """
+        
+        timestamp = time.now()
+        user_id = 123456789 # read ID from credentials or use API key
+        
+        # Todo create some method to write the log "log_to_db(user_id, timestamp, activity)". Use logging module?
+                
+        return True
               
     # Add further methods here
